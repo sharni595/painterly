@@ -1,0 +1,49 @@
+<div class="container mt-5">
+
+  <div class="row">
+    <div class="col-md-6 offset-md-3 mb-3">
+      <div class="todo-form-wrapper">
+        <form id="todo-form">
+          <div class="row">
+            <div class="col-8">
+              <input class="form-control" id="todo-form-input" placeholder="Add a todo" type="text" />
+            </div>
+            <div class="col-4">
+              <button type="submit" class="w-100 btn btn-success">Add Todo</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-md-8 offset-md-2">
+      <ul id="todo-list" class="list-group">
+        {{#each todos }}
+        <li class="list-group-item d-flex justify-content-between">
+
+          <span class="todo-item-message">
+            {{message}}
+          </span>
+
+          <div class="d-flex">
+            {{#unless completed}}
+            <button class="btn btn-primary mr-2" id="todo-delete-complete" data-todo-id={{id}}>
+              complete
+            </button>
+            {{/unless}}
+
+            <button class="btn btn-danger todo-delete-btn" data-todo-id={{id}}>
+              delete
+            </button>
+          </div>
+
+        </li>
+        {{/each }}
+      </ul>
+    </div>
+
+  </div>
+</div>
