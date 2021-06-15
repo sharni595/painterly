@@ -5,7 +5,7 @@ class Todo extends Model {}
 
 Todo.init(
   {
-    message: {
+    id: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {

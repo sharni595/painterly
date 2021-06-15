@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS painterly_db;
+CREATE DATABASE painterly_db;
