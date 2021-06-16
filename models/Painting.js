@@ -1,25 +1,42 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Todo extends Model {}
+class Painting extends Model {}
 
-Todo.init(
+Painting.init(
   {
     id: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
-      validate: {
-        len: [1]
-      }
+      primaryKey: true,
+      autoIncrement: true
     },
-    completed: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    image_url: {
+      type: DataTypes.STRING,
+      allowNull:false
+    },
+    description: {
+      type: DataTypes.TEXT
+    },
+    user_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'user',
+        key: 'id'
+      }
     }
   },
   {
-    sequelize
+    sequelize,
+    freezeTableName: true,
+    underscored: true,
+    modelName: 'painting'
   }
 );
 
-module.exports = Todo;
+module.exports = Painting;
