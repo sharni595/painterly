@@ -15,7 +15,7 @@ Comment.belongsTo(User, {
 });
 
 Comment.belongsTo(Painting, {
-    foreignKey: 'post_id'
+    foreignKey: 'painting_id'
 });
 
 User.hasMany(Comment, {
@@ -23,7 +23,7 @@ User.hasMany(Comment, {
 });
 
 Painting.hasMany(Comment, {
-    foreignKey: 'post_id'
+    foreignKey: 'painting_id'
 });
 
 module.exports = { User, Painting, Comment };
