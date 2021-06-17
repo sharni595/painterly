@@ -1,4 +1,5 @@
-const { Todo } = require('../../models');
+const { Painting, User, Comment } = require('../../models');
+const router = require('express').Router();
 //code needs to be changed to be painting instead of todo.
 //alex created this with syntax im not familiar with, if you wanna change it to have the methods separate from the module.exports, feel free. 
 module.exports = {
