@@ -49,3 +49,11 @@ class Canvas {
     }
 }
 
+clear.addEventListener('click', () => {
+    paths.splice(0);
+    background(255);
+});
+
+save.addEventListener('click', () => {
+    saveCanvas('painterly-canvas', 'jpg');
+});
