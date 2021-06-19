@@ -1,5 +1,7 @@
-const { Painting, User, Comment } = require('../../models');
+const { Painting, Comment } = require('../../models');
 const router = require('express').Router();
+const User = require('../../models/User');
+const bcrypt = require('bcrypt');
 
 router.get('/', (req, res) => {
     User.findAll({
@@ -77,10 +79,18 @@ router.post('/login', (req, res) => {
           res.status(400).json({ message: 'No user with that email!' });
           return;
         }
-        console.log(typeof dbUserData.checkPassword);
 
-        const validPassword = dbUserData.checkPassword(req.body.password);
+        console.log(dbUserData.password);
+
+        let password = dbUserData.password;
+
+        function checkPassword (loginPw) {
+            return bcrypt.compare(loginPw, password);
+        }
+        const validPassword = checkPassword(req.body.password);
     
+        //console.log(typeof dbUserData.checkPassword);
+
         if (!validPassword) {
           res.status(400).json({ message: 'Incorrect password!' });
           return;

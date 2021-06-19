@@ -4,6 +4,7 @@
         "Kota",
         "Todos",
         "exphbs",
+        "resave",
         "templating"
     ]
 }
