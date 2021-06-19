@@ -7,6 +7,14 @@
 
 }
 
+.tools{
+    display: flex;
+    justify-content: center;
+    flex-direction:row;
+    margin-top: 15px;
+}
+
+
 .tools .color-field{
     height: 40px;
     width: 40px;
@@ -18,6 +26,18 @@
     box-sizing: border-box;
     border-radius: 50%;
     border: 2px solid white;
+    align-self: center;
 
+}
 
+.tools .buttons{
+    align-self: center;
+    width: 100px;
+    height: 40px;
+    border: 2px solid white;
+    cursor: pointer;
+    color: black;
+    background: #222;
+    font-weight: bold;
+    margin: 0 15px;
 }
