@@ -1,0 +1,23 @@
+*{
+    margin: 0px;
+    padding: 30px;
+    font-family: "Mukta";
+    overflow: hidden;
+    background: white;
+
+}
+
+.tools .color-field{
+    height: 40px;
+    width: 40px;
+    min-height: 40px;
+    min-width: 40px;
+    cursor: pointer;
+    display: inline-block;
+    cursor:pointer;
+    box-sizing: border-box;
+    border-radius: 50%;
+    border: 2px solid white;
+
+
+}
