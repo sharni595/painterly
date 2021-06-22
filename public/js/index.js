@@ -1,3 +1,5 @@
+//this is the starter code, will need to check how much of this is relevant/needs to remain/be adjusted
+
 const todoForm = document.getElementById('todo-form');
 const todoList = document.getElementById('todo-list');
 
