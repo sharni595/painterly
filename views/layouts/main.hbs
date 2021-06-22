@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Example App</title>
+  <title>Painterly</title>
 
   <!-- Latest compiled and minified CSS & JS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.0.0/lumen/bootstrap.min.css" />
@@ -15,7 +15,7 @@
 <body>
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Todo App</a>
+    <a class="navbar-brand" href="#">Painterly</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -24,17 +24,25 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="/">Home</a>
         </li>
 
         <li class="nav-item active">
-          <a class="nav-link" href="/todos">Todos <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="/dashboard">My Paintings</a>
+        </li>
+
+        <li>
+          <button id="logout">Log Out</button>
         </li>
       </ul>
     </div>
   </nav>
 
   {{{body}}}
+
+  <footer>
+    Created by Sharni, Kota, Brian & Tori &copy;
+  </footer>
 
   <script src="/js/index.js"></script>
 </body>
