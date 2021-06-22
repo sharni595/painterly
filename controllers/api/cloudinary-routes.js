@@ -1,13 +1,9 @@
 const router = require('express').Router();
 const cloudinary = require('cloudinary').v2;
 const fileupload = require('express-fileupload');
-require('dotenv')
+// require('dotenv').config();
 
-cloudinary.config({
-    cloud_name: '',
-    api_key: '',
-    api_secret: ''
-});
+
 
 router.use(fileupload({
     useTempFiles: true
@@ -25,4 +21,6 @@ router.post('/upload', (req, res) => {
             result
         })
     })
-})
+});
+
+module.exports = router;

@@ -4,7 +4,13 @@ const exphbs = require('express-handlebars');
 const routes = require('./controllers');
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const cloudinary = require('cloudinary');
 
+cloudinary.config({
+  cloud_name: CC_NAME,
+  api_key: CC_KEY,
+  api_secret: CC_SECRET
+});
 
 const sess = {
   secret: process.env.SECRET,
