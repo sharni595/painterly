@@ -4,15 +4,15 @@ const weight = document.getElementById('line-weight');
 const clear = document.getElementById('clear-canvas');
 const save = document.getElementById('save-canvas');
 const paths = [];
-const currentPath = [];
+let currentPath = [];
 var canvas;
 
-const setup = () => {
+function setup() {
     canvas = createCanvas(window.innerWidth, window.innerHeight);
     background(255);
 };
 
-const draw = () => {
+function draw() {
     noFill();
 
     if(mouseIsPressed) {
@@ -37,7 +37,7 @@ const draw = () => {
     });
 }
 
-const mousePressed = () => {
+function mousePressed() {
     currentPath = [];
     paths.push(currentPath);
 }
@@ -48,5 +48,5 @@ clear.addEventListener('click', () => {
 });
 
 save.addEventListener('click', () => {
-    saveCanvas('painterly-canvas', 'jpg');
+    saveCanvas('painterly-canvas-' + Date(), 'jpg');
 });
