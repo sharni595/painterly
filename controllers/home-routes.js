@@ -12,6 +12,11 @@ router.get('/dashboard', (req, res) => {
     
 })
 
+router.get('/canvas', (req, res) => {
+    res.render('canvas')
+    
+})
+
 //login in and sign up forms will go here
 router.get('/login', (req, res) => {
     if(req.session.loggedIn) {
