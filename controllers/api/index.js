@@ -8,6 +8,6 @@ const cloudinaryRoutes = require('./cloudinary-routes');
 router.use('/comments', commentRoutes);
 router.use('/painting', paintingRoutes);
 router.use('/users', userRoutes);
-router.use('/images', cloudinaryRoutes);
+router.use('/upload', cloudinaryRoutes);
 
 module.exports = router;
