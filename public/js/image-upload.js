@@ -1,12 +1,13 @@
-const file = document.getElementById('fileupload').value;
-const upload = document.getElementById('uploadButton')
-const formData = new FormData();
+const upload = document.getElementById('uploadButton');
+const form = document.getElementById('form')
 
-formData.append('photo', file)
+form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const file = document.getElementById('fileupload').files[0];
+    const formData = new FormData();
+    formData.append('photo', file)
 
-upload.addEventListener('submit', () => {
-
-    fetch('/upload', {
+    fetch('/api/upload', {
         method: 'POST',
         body: formData
     })
@@ -19,4 +20,6 @@ upload.addEventListener('submit', () => {
         .then(imageData => {
             console.log(imageData);
         })
+
+    return false
 })
