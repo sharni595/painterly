@@ -5,7 +5,6 @@ const router = require('express').Router();
 //code needs to be changed to be painting instead of todo.
 //will let Kota do the post route?
 router.get('/', (req, res) => {
-  console.log('---------------------------------')
   Painting.findAll({
     attributes: [
       'id',
@@ -31,7 +30,6 @@ router.get('/', (req, res) => {
     ]
   })
     .then(dbPaintingData => {
-      console.log('hit');
       res.json(dbPaintingData)
     })
     .catch(err => {

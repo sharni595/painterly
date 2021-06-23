@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "bootstrap": "^5.0.2",
     "cloudinary": "^1.26.0",
     "connect-session-sequelize": "^7.1.1",
     "dotenv": "^10.0.0",

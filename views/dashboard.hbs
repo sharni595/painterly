@@ -1,0 +1,17 @@
+<section>
+{{#if painting.length}}
+    <div>
+        {{#each painting}}
+    <div class="painting">
+        <a href="/painting/{{id}}">
+        <h4>{{title}}</h4>
+        <img src={{image_url}} alt="a painting">
+        </a>
+        <a  href="/user/{{user_id}}"> 
+        <span>{{user.username}}</span>
+        </a>
+    </div>
+    {{/each}}
+    </div>
+{{/if}}
+</section>
