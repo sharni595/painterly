@@ -10,24 +10,24 @@ router.get('/', (req, res) => {
       'id',
       'title',
       'image_url',
-      'description', 
+      'description',
       'created_at'
-      ],
-      order: [['created_at', 'DESC']],
-      include: [
-          {
-              model: Comment,
-              attributes: ['id', 'text', 'post_id', 'user_id'],
-              include: {
-                  model: User,
-                  attributes: ['username']
-              }
-          },
-          {
-              model: User, 
-              attributes: ['username']
-          }
-      ]
+    ],
+    order: [['created_at', 'DESC']],
+    include: [
+      {
+        model: Comment,
+        attributes: ['id', 'text', 'post_id', 'user_id'],
+        include: {
+          model: User,
+          attributes: ['username']
+        }
+      },
+      {
+        model: User,
+        attributes: ['username']
+      }
+    ]
   })
     .then(dbPaintingData => res.json(dbPaintingData))
     .catch(err => {
@@ -45,27 +45,27 @@ router.get('/:id', (req, res) => {
       'id',
       'title',
       'image_url',
-      'description', 
+      'description',
       'created_at'
-      ],
-      order: [['created_at', 'DESC']],
-      include: [
-          {
-              model: Comment,
-              attributes: ['id', 'text', 'post_id', 'user_id'],
-              include: {
-                  model: User,
-                  attributes: ['username']
-              }
-          },
-          {
-              model: User, 
-              attributes: ['username']
-          }
-      ]
+    ],
+    order: [['created_at', 'DESC']],
+    include: [
+      {
+        model: Comment,
+        attributes: ['id', 'text', 'post_id', 'user_id'],
+        include: {
+          model: User,
+          attributes: ['username']
+        }
+      },
+      {
+        model: User,
+        attributes: ['username']
+      }
+    ]
   })
     .then(dbPaintingData => {
-      if (!dbPaintingData){
+      if (!dbPaintingData) {
         res.status(404).json({ message: 'No painting found with this id' });
         return;
       }
@@ -75,6 +75,20 @@ router.get('/:id', (req, res) => {
       console.log(err);
       res.status(500).json(err);
     });
+})
+
+router.post('/', (req, res) => {
+  Painting.create({
+    title: req.body.title,
+    image_url: req.body.image_url,
+    description: req.body.description,
+    user_id: req.body.user_id
+  })
+    .then(dbPaintingData => res.json(dbPaintingData))
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    })
 })
 
 
