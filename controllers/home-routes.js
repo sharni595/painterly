@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
         include: [
             {
                 model: Comment,
-                attributes: ['id', 'text', 'panting_id', 'user_id'],
+                attributes: ['id', 'text', 'painting_id', 'user_id'],
                 include: {
                     model: User,
                     attributes: ['username']
@@ -141,6 +141,8 @@ router.get('/painting/:id', (req, res) => {
          res.status(500).json(err);
      });
 })
+
+
 
 
 //when a user clicks the name of the person who created a painting, they will be redirected to a page that displays all of that users creations. 

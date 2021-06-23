@@ -1,26 +1,13 @@
-<div class="container my-5">
-
-  <h1 class="text-center">Home Page</h1>
-
-  <hr>
-
-  <h3>Page Views: 0</h3>
-
-  <p>
-    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laborum nobis aut ex eveniet sint atque nulla animi,
-    molestiae ipsam, quaerat ducimus quos natus esse ab? Provident pariatur laborum facere laudantium. Lorem ipsum dolor
-    sit amet consectetur adipisicing elit. Consectetur excepturi quae quidem ea vitae debitis inventore qui odio,
-    distinctio vel tempore ullam molestias sed. Similique deserunt nisi velit ea? Dolores. Lorem ipsum dolor, sit amet
-    consectetur adipisicing elit. Placeat non consequatur possimus veniam laboriosam accusantium repellendus. Iure
-    ducimus numquam libero ipsum. Accusantium, ab quae corporis odit libero unde optio architecto.
-  </p>
-
-  <p>
-    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laborum nobis aut ex eveniet sint atque nulla animi,
-    molestiae ipsam, quaerat ducimus quos natus esse ab? Provident pariatur laborum facere laudantium. Lorem ipsum dolor
-    sit amet consectetur adipisicing elit. Consectetur excepturi quae quidem ea vitae debitis inventore qui odio,
-    distinctio vel tempore ullam molestias sed. Similique deserunt nisi velit ea? Dolores. Lorem ipsum dolor, sit amet
-    consectetur adipisicing elit. Placeat non consequatur possimus veniam laboriosam accusantium repellendus. Iure
-    ducimus numquam libero ipsum. Accusantium, ab quae corporis odit libero unde optio architecto.
-  </p>
-</div>
+<section id="homepage">
+  {{#each painting}}
+  <div class="painting">
+    <a href="/painting/{{painting.id}}">
+      <h4>{{painting.title}}</h4>
+      <img src={{painting.image_url}}>
+    </a>
+    <a  href="/user/{{user.id}}"> 
+      <span>{{user.username}}</span>
+    </a>
+  </div>
+  {{/else}}
+</section>
