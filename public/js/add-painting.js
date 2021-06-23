@@ -15,7 +15,7 @@ function setup() {
 function draw() {
     noFill();
 
-    if(mouseIsPressed) {
+    if (mouseIsPressed) {
         const point = {
             x: mouseX,
             y: mouseY,
@@ -35,6 +35,11 @@ function draw() {
         });
         endShape();
     });
+}
+
+function touchStarted() {
+    currentPath = [];
+    paths.push(currentPath);
 }
 
 function mousePressed() {
