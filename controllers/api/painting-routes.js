@@ -12,24 +12,26 @@ router.get('/', (req, res) => {
       'image_url',
       'description', 
       'created_at'
-      ],
-      order: [['created_at', 'DESC']],
-      include: [
-          {
-              model: Comment,
-              attributes: ['id', 'text', 'post_id', 'user_id'],
-              include: {
-                  model: User,
-                  attributes: ['username']
-              }
-          },
-          {
-              model: User, 
-              attributes: ['username']
-          }
-      ]
+    ],
+    order: [['created_at', 'DESC']],
+    include: [
+        {
+            model: Comment,
+            attributes: ['id', 'text', 'painting_id', 'user_id'],
+            include: {
+                model: User,
+                attributes: ['username']
+            }
+        },
+        {
+            model: User, 
+            attributes: ['username']
+        }
+    ]
   })
-    .then(dbPaintingData => res.json(dbPaintingData))
+    .then(dbPaintingData => {
+      res.json(dbPaintingData)
+    })
     .catch(err => {
       console.log(err);
       res.status(500).json(err);
@@ -52,7 +54,7 @@ router.get('/:id', (req, res) => {
       include: [
           {
               model: Comment,
-              attributes: ['id', 'text', 'post_id', 'user_id'],
+              attributes: ['id', 'text', 'painting_id', 'user_id'],
               include: {
                   model: User,
                   attributes: ['username']
@@ -77,5 +79,18 @@ router.get('/:id', (req, res) => {
     });
 })
 
+router.post('/', (req, res) => {
+  Painting.create({
+    title: req.body.title,
+    image_url: req.body.image_url,
+    description: req.body.description,
+    user_id: req.body.user_id
+  })
+    .then(dbPaintingData => res.json(dbPaintingData))
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+})
 
 module.exports = router;
