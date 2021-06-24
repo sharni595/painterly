@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
     include: [
       {
         model: Comment,
-        attributes: ['id', 'text', 'post_id', 'user_id'],
+        attributes: ['id', 'text', 'painting_id', 'user_id'],
         include: {
           model: User,
           attributes: ['username']
@@ -29,7 +29,9 @@ router.get('/', (req, res) => {
       }
     ]
   })
-    .then(dbPaintingData => res.json(dbPaintingData))
+    .then(dbPaintingData => {
+      res.json(dbPaintingData)
+    })
     .catch(err => {
       console.log(err);
       res.status(500).json(err);
@@ -52,7 +54,7 @@ router.get('/:id', (req, res) => {
     include: [
       {
         model: Comment,
-        attributes: ['id', 'text', 'post_id', 'user_id'],
+        attributes: ['id', 'text', 'painting_id', 'user_id'],
         include: {
           model: User,
           attributes: ['username']
@@ -82,14 +84,13 @@ router.post('/', (req, res) => {
     title: req.body.title,
     image_url: req.body.image_url,
     description: req.body.description,
-    user_id: req.session.user_id
+    user_id: req.body.user_id
   })
     .then(dbPaintingData => res.json(dbPaintingData))
     .catch(err => {
       console.log(err);
       res.status(500).json(err);
-    })
+    });
 })
-
 
 module.exports = router;
