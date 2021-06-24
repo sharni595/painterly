@@ -53,5 +53,6 @@ clear.addEventListener('click', () => {
 });
 
 save.addEventListener('click', () => {
-    saveCanvas('painterly-canvas-' + Date(), 'jpg');
+    let canvasName = prompt('What would you like to name your painting?')
+    saveCanvas(canvasName, 'jpg');
 });

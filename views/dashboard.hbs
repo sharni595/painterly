@@ -1,9 +1,21 @@
 <form id="form">
-  <div>
-    <label>Select file to upload</label>
-    <input type="file" id="fileupload">
-  </div>
-  <button type="submit" id="uploadButton">Convert</button>
+  <ul>
+    <li>
+      <label for="title">What is the title of your painting?</label>
+      <input type="text" id="title">
+    </li>
+    <li>
+      <label for="description">Describe your painting</label>
+      <textarea name="description" id="description" cols="30" rows="10"></textarea>
+    </li>
+    <li>
+      <label>Select file to upload</label>
+      <input type="file" id="fileupload">
+    </li>
+    <li>
+      <button type="submit" id="uploadButton">Convert</button>
+    </li>
+  </ul>
 </form>
 
 <script src="/js/image-upload.js"></script>
