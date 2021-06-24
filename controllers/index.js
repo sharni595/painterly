@@ -1,15 +1,15 @@
 const router = require('express').Router();
-const todoRoutes = require('./todo.routes');
-const viewRoutes = require('./view.routes');
 
-// API
-router
-  .post('/api/todos/', todoRoutes.create)
-  .delete('/api/todos/', todoRoutes.delete);
+const apiRoutes = require('./api');
+const homeRoutes = require('./home-routes');
 
-// VIEWS
-router
-  .get('/', viewRoutes.renderHome)
-  .get('/todos', viewRoutes.renderTodos);
+router.use('/api', apiRoutes);
+
+router.use('/', homeRoutes);
+
+// router.use((req, res) => {
+//     res.status(404).end();
+// });
+
 
 module.exports = router;
