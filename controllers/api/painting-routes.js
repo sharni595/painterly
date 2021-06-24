@@ -11,6 +11,7 @@ router.get('/', (req, res) => {
       'title',
       'image_url',
       'description', 
+      'user_id',
       'created_at'
     ],
     order: [['created_at', 'DESC']],
@@ -48,6 +49,7 @@ router.get('/:id', (req, res) => {
       'title',
       'image_url',
       'description', 
+      'user_id',
       'created_at'
       ],
       order: [['created_at', 'DESC']],

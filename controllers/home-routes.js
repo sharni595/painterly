@@ -4,12 +4,14 @@ const { Painting, User, Comment} = require('../models');
 
 //displays all of the art work that has been created
 router.get('/', (req, res) => {
+    console.log('>>>>>>>>>>>>');
     Painting.findAll({
         attributes: [
         'id',
         'title',
         'image_url', 
         'description',
+        'user_id',
         'created_at'
         ],
         order: [['created_at', 'DESC']],
@@ -29,7 +31,9 @@ router.get('/', (req, res) => {
         ]
     })
         .then(dbPaintingData => {
+            console.log(dbPaintingData);
             const posts = dbPaintingData.map(post => post.get({ plain: true }));
+            console.log(posts);
             res.render('homepage', {
                 posts, 
                 loggedIn: req.session.loggedIn
@@ -44,6 +48,8 @@ router.get('/', (req, res) => {
 
 //where a user can create their own artwork. Will have a text box to add a title, and a canvas for painting. 
 router.get('/dashboard', (req, res) => {
+    console.log('--------------------');
+    console.log(req.session);
     Painting.findAll({
         where: {
             user_id: req.session.user_id
@@ -53,6 +59,7 @@ router.get('/dashboard', (req, res) => {
         'title',
         'image_url',
         'description', 
+        'user_id',
         'created_at'
         ],
         order: [['created_at', 'DESC']],
@@ -70,8 +77,10 @@ router.get('/dashboard', (req, res) => {
                 attributes: ['username']
             }
         ]
+        
     })
         .then(dbPaintingData => {
+            console.log(req.session.user_id)
             const posts = dbPaintingData.map(post => post.get({ plain: true}));
             res.render('dashboard', {
                 posts, 
@@ -110,7 +119,9 @@ router.get('/painting/:id', (req, res) => {
             'title',
             'image_url',
             'description',
-            'created_at'        ],
+            'user_id',
+            'created_at'  
+        ],      
         include: [
             {
                 model: Comment,
