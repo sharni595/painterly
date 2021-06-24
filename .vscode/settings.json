@@ -5,6 +5,8 @@
         "Todos",
         "exphbs",
         "resave",
-        "templating"
+        "signup",
+        "templating",
+        "username"
     ]
 }

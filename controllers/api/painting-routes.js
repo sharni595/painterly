@@ -15,21 +15,23 @@ router.get('/', (req, res) => {
     ],
     order: [['created_at', 'DESC']],
     include: [
-      {
-        model: Comment,
-        attributes: ['id', 'text', 'post_id', 'user_id'],
-        include: {
-          model: User,
-          attributes: ['username']
+        {
+            model: Comment,
+            attributes: ['id', 'text', 'painting_id', 'user_id'],
+            include: {
+                model: User,
+                attributes: ['username']
+            }
+        },
+        {
+            model: User, 
+            attributes: ['username']
         }
-      },
-      {
-        model: User,
-        attributes: ['username']
-      }
     ]
   })
-    .then(dbPaintingData => res.json(dbPaintingData))
+    .then(dbPaintingData => {
+      res.json(dbPaintingData)
+    })
     .catch(err => {
       console.log(err);
       res.status(500).json(err);
@@ -47,22 +49,22 @@ router.get('/:id', (req, res) => {
       'image_url',
       'description',
       'created_at'
-    ],
-    order: [['created_at', 'DESC']],
-    include: [
-      {
-        model: Comment,
-        attributes: ['id', 'text', 'post_id', 'user_id'],
-        include: {
-          model: User,
-          attributes: ['username']
-        }
-      },
-      {
-        model: User,
-        attributes: ['username']
-      }
-    ]
+      ],
+      order: [['created_at', 'DESC']],
+      include: [
+          {
+              model: Comment,
+              attributes: ['id', 'text', 'painting_id', 'user_id'],
+              include: {
+                  model: User,
+                  attributes: ['username']
+              }
+          },
+          {
+              model: User, 
+              attributes: ['username']
+          }
+      ]
   })
     .then(dbPaintingData => {
       if (!dbPaintingData) {
@@ -88,8 +90,7 @@ router.post('/', (req, res) => {
     .catch(err => {
       console.log(err);
       res.status(500).json(err);
-    })
+    });
 })
-
 
 module.exports = router;
