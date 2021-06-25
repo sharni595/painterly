@@ -173,11 +173,7 @@ router.get('user/:id', (req, res) => {
                 attributes: ['id', 'title', 'image_url', 'description', 'user_id', 'created_at'],
                 include: {
                     model: Comment,
-                    attributes: ['id', 'text', 'painting_id', 'user_id', 'created_at'],
-                    include: {
-                        model: User,
-                        attributes: ['username']
-                    }
+                    attributes: ['id', 'text', 'painting_id', 'user_id', 'created_at']
                 }
             }
         ]
