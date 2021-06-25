@@ -15,7 +15,7 @@ function setup() {
 function draw() {
     noFill();
 
-    if(mouseIsPressed) {
+    if (mouseIsPressed) {
         const point = {
             x: mouseX,
             y: mouseY,
@@ -37,6 +37,11 @@ function draw() {
     });
 }
 
+function touchStarted() {
+    currentPath = [];
+    paths.push(currentPath);
+}
+
 function mousePressed() {
     currentPath = [];
     paths.push(currentPath);
@@ -48,5 +53,6 @@ clear.addEventListener('click', () => {
 });
 
 save.addEventListener('click', () => {
-    saveCanvas('painterly-canvas-' + Date(), 'jpg');
+    let canvasName = prompt('What would you like to name your painting?')
+    saveCanvas(canvasName, 'jpg');
 });

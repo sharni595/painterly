@@ -86,7 +86,7 @@ router.post('/', (req, res) => {
     title: req.body.title,
     image_url: req.body.image_url,
     description: req.body.description,
-    user_id: req.body.user_id
+    user_id: req.session.user_id
   })
     .then(dbPaintingData => res.json(dbPaintingData))
     .catch(err => {
