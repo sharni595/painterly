@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
-const { Painting, User, Comment} = require('../models');
+const { Painting, User, Comment } = require('../models');
 
 //displays all of the art work that has been created
 router.get('/', (req, res) => {
@@ -25,7 +25,7 @@ router.get('/', (req, res) => {
                 }
             },
             {
-                model: User, 
+                model: User,
                 attributes: ['username']
             }
         ]
@@ -33,7 +33,7 @@ router.get('/', (req, res) => {
         .then(dbPaintingData => {
             const posts = dbPaintingData.map(post => post.get({ plain: true }));
             res.render('homepage', {
-                posts, 
+                posts,
                 loggedIn: req.session.loggedIn
             });
         })
@@ -69,17 +69,17 @@ router.get('/dashboard', (req, res) => {
                 }
             },
             {
-                model: User, 
+                model: User,
                 attributes: ['username']
             }
         ]
         
     })
         .then(dbPaintingData => {
-            console.log(req.session.user_id)
-            const posts = dbPaintingData.map(post => post.get({ plain: true}));
+            const posts = dbPaintingData.map(post => post.get({ plain: true }));
+
             res.render('dashboard', {
-                posts, 
+                posts,
                 loggedIn: req.session.loggedIn
             });
         })
@@ -87,17 +87,19 @@ router.get('/dashboard', (req, res) => {
             console.log(err);
             res.status(500).json(err);
         });
-    
+
 })
 
 router.get('/canvas', (req, res) => {
-    res.render('canvas')
-    
+    res.render('canvas', {
+        loggedIn: req.session.loggedIn
+    })
+
 })
 
 //login in and sign up forms will go here
 router.get('/login', (req, res) => {
-    if(req.session.loggedIn) {
+    if (req.session.loggedIn) {
         res.redirect('/');
         return;
     }
@@ -108,10 +110,10 @@ router.get('/login', (req, res) => {
 router.get('/painting/:id', (req, res) => {
     Painting.findOne({
         where: {
-            id : req.params.id
+            id: req.params.id
         },
         attributes: [
-            'id', 
+            'id',
             'title',
             'image_url',
             'description',
