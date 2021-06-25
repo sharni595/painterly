@@ -1,16 +1,16 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
-const { Painting, User, Comment} = require('../models');
+const { Painting, User, Comment } = require('../models');
 
 //displays all of the art work that has been created
 router.get('/', (req, res) => {
     Painting.findAll({
         attributes: [
-        'id',
-        'title',
-        'image_url', 
-        'description',
-        'created_at'
+            'id',
+            'title',
+            'image_url',
+            'description',
+            'created_at'
         ],
         order: [['created_at', 'DESC']],
         include: [
@@ -23,7 +23,7 @@ router.get('/', (req, res) => {
                 }
             },
             {
-                model: User, 
+                model: User,
                 attributes: ['username']
             }
         ]
@@ -31,7 +31,7 @@ router.get('/', (req, res) => {
         .then(dbPaintingData => {
             const posts = dbPaintingData.map(post => post.get({ plain: true }));
             res.render('homepage', {
-                posts, 
+                posts,
                 loggedIn: req.session.loggedIn
             });
         })
@@ -49,11 +49,11 @@ router.get('/dashboard', (req, res) => {
             user_id: req.session.user_id
         },
         attributes: [
-        'id',
-        'title',
-        'image_url',
-        'description', 
-        'created_at'
+            'id',
+            'title',
+            'image_url',
+            'description',
+            'created_at'
         ],
         order: [['created_at', 'DESC']],
         include: [
@@ -66,15 +66,15 @@ router.get('/dashboard', (req, res) => {
                 }
             },
             {
-                model: User, 
+                model: User,
                 attributes: ['username']
             }
         ]
     })
         .then(dbPaintingData => {
-            const posts = dbPaintingData.map(post => post.get({ plain: true}));
+            const posts = dbPaintingData.map(post => post.get({ plain: true }));
             res.render('dashboard', {
-                posts, 
+                posts,
                 loggedIn: req.session.loggedIn
             });
         })
@@ -82,17 +82,19 @@ router.get('/dashboard', (req, res) => {
             console.log(err);
             res.status(500).json(err);
         });
-    
+
 })
 
 router.get('/canvas', (req, res) => {
-    res.render('canvas')
-    
+    res.render('canvas', {
+        loggedIn: req.session.loggedIn
+    })
+
 })
 
 //login in and sign up forms will go here
 router.get('/login', (req, res) => {
-    if(req.session.loggedIn) {
+    if (req.session.loggedIn) {
         res.redirect('/');
         return;
     }
@@ -103,14 +105,14 @@ router.get('/login', (req, res) => {
 router.get('/painting/:id', (req, res) => {
     Painting.findOne({
         where: {
-            id : req.params.id
+            id: req.params.id
         },
         attributes: [
-            'id', 
+            'id',
             'title',
             'image_url',
             'description',
-            'created_at'        ],
+            'created_at'],
         include: [
             {
                 model: Comment,
@@ -126,25 +128,25 @@ router.get('/painting/:id', (req, res) => {
             }
         ]
     })
-     .then(dbPaintingData => {
-         if (!dbPaintingData) {
-             res.status(400).json({ message: 'No painting found with this id'});
-             return;
-         }
- 
-         //serialize the data
-         const post = dbPaintingData.get({ plain: true });
- 
-         //pass data to template
-         res.render('single-post', { 
-           post,
-           loggedIn: req.session.loggedIn
-         });
-     })
-     .catch(err => {
-         console.log(err);
-         res.status(500).json(err);
-     });
+        .then(dbPaintingData => {
+            if (!dbPaintingData) {
+                res.status(400).json({ message: 'No painting found with this id' });
+                return;
+            }
+
+            //serialize the data
+            const post = dbPaintingData.get({ plain: true });
+
+            //pass data to template
+            res.render('single-post', {
+                post,
+                loggedIn: req.session.loggedIn
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
 })
 
 

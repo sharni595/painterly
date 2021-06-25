@@ -15,18 +15,18 @@ router.get('/', (req, res) => {
     ],
     order: [['created_at', 'DESC']],
     include: [
-        {
-            model: Comment,
-            attributes: ['id', 'text', 'painting_id', 'user_id'],
-            include: {
-                model: User,
-                attributes: ['username']
-            }
-        },
-        {
-            model: User, 
-            attributes: ['username']
+      {
+        model: Comment,
+        attributes: ['id', 'text', 'painting_id', 'user_id'],
+        include: {
+          model: User,
+          attributes: ['username']
         }
+      },
+      {
+        model: User,
+        attributes: ['username']
+      }
     ]
   })
     .then(dbPaintingData => {
@@ -49,22 +49,22 @@ router.get('/:id', (req, res) => {
       'image_url',
       'description',
       'created_at'
-      ],
-      order: [['created_at', 'DESC']],
-      include: [
-          {
-              model: Comment,
-              attributes: ['id', 'text', 'painting_id', 'user_id'],
-              include: {
-                  model: User,
-                  attributes: ['username']
-              }
-          },
-          {
-              model: User, 
-              attributes: ['username']
-          }
-      ]
+    ],
+    order: [['created_at', 'DESC']],
+    include: [
+      {
+        model: Comment,
+        attributes: ['id', 'text', 'painting_id', 'user_id'],
+        include: {
+          model: User,
+          attributes: ['username']
+        }
+      },
+      {
+        model: User,
+        attributes: ['username']
+      }
+    ]
   })
     .then(dbPaintingData => {
       if (!dbPaintingData) {
