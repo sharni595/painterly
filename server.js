@@ -9,11 +9,13 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const sess = {
   secret: process.env.SECRET,
   cookie: {
-    maxAge: 3600000
+    user_id: '',
+    username: '',
+    loggedIn: false
   },
   resave: false,
   saveUninitialized: true,
-  store: new SequelizeStore({ db: sequelize })
+  store: new SequelizeStore({ db: sequelize }),
 }
 
 const app = express();

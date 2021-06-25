@@ -4,13 +4,15 @@ const { Painting, User, Comment } = require('../models');
 
 //displays all of the art work that has been created
 router.get('/', (req, res) => {
+    console.log('>>>>>>>>>>>>');
     Painting.findAll({
         attributes: [
-            'id',
-            'title',
-            'image_url',
-            'description',
-            'created_at'
+        'id',
+        'title',
+        'image_url', 
+        'description',
+        'user_id',
+        'created_at'
         ],
         order: [['created_at', 'DESC']],
         include: [
@@ -49,11 +51,12 @@ router.get('/dashboard', (req, res) => {
             user_id: req.session.user_id
         },
         attributes: [
-            'id',
-            'title',
-            'image_url',
-            'description',
-            'created_at'
+        'id',
+        'title',
+        'image_url',
+        'description', 
+        'user_id',
+        'created_at'
         ],
         order: [['created_at', 'DESC']],
         include: [
@@ -70,9 +73,11 @@ router.get('/dashboard', (req, res) => {
                 attributes: ['username']
             }
         ]
+        
     })
         .then(dbPaintingData => {
             const posts = dbPaintingData.map(post => post.get({ plain: true }));
+
             res.render('dashboard', {
                 posts,
                 loggedIn: req.session.loggedIn
@@ -112,7 +117,9 @@ router.get('/painting/:id', (req, res) => {
             'title',
             'image_url',
             'description',
-            'created_at'],
+            'user_id',
+            'created_at'  
+        ],      
         include: [
             {
                 model: Comment,
@@ -128,25 +135,25 @@ router.get('/painting/:id', (req, res) => {
             }
         ]
     })
-        .then(dbPaintingData => {
-            if (!dbPaintingData) {
-                res.status(400).json({ message: 'No painting found with this id' });
-                return;
-            }
-
-            //serialize the data
-            const post = dbPaintingData.get({ plain: true });
-
-            //pass data to template
-            res.render('single-post', {
-                post,
-                loggedIn: req.session.loggedIn
-            });
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json(err);
-        });
+     .then(dbPaintingData => {
+         if (!dbPaintingData) {
+             res.status(400).json({ message: 'No painting found with this id'});
+             return;
+         }
+ 
+         //serialize the data
+         const painting = dbPaintingData.get({ plain: true });
+ 
+         //pass data to template
+         res.render('single-post', { 
+           painting,
+           loggedIn: req.session.loggedIn
+         });
+     })
+     .catch(err => {
+         console.log(err);
+         res.status(500).json(err);
+     });
 })
 
 
@@ -154,7 +161,44 @@ router.get('/painting/:id', (req, res) => {
 
 //when a user clicks the name of the person who created a painting, they will be redirected to a page that displays all of that users creations. 
 router.get('user/:id', (req, res) => {
-    res.render('user-profile')
+    User.findOne({
+        where: {
+            id : req.params.id
+        },
+        attributes: [
+            'id', 
+            'username'  
+        ],      
+        include: [
+            {
+                model: Painting,
+                attributes: ['id', 'title', 'image_url', 'description', 'user_id', 'created_at'],
+                include: {
+                    model: Comment,
+                    attributes: ['id', 'text', 'painting_id', 'user_id', 'created_at']
+                }
+            }
+        ]
+    })
+     .then(dbUserData => {
+         if (!dbUserData) {
+             res.status(400).json({ message: 'No user found with this id'});
+             return;
+         }
+ 
+         //serialize the data
+         const user = dbUserData.get({ plain: true });
+ 
+         //pass data to template
+         res.render('user-profile', { 
+           user,
+           loggedIn: req.session.loggedIn
+         });
+     })
+     .catch(err => {
+         console.log(err);
+         res.status(500).json(err);
+     });
 })
 
 

@@ -10,7 +10,8 @@ router.get('/', (req, res) => {
       'id',
       'title',
       'image_url',
-      'description',
+      'description', 
+      'user_id',
       'created_at'
     ],
     order: [['created_at', 'DESC']],
@@ -47,7 +48,8 @@ router.get('/:id', (req, res) => {
       'id',
       'title',
       'image_url',
-      'description',
+      'description', 
+      'user_id',
       'created_at'
     ],
     order: [['created_at', 'DESC']],
@@ -67,7 +69,7 @@ router.get('/:id', (req, res) => {
     ]
   })
     .then(dbPaintingData => {
-      if (!dbPaintingData) {
+      if (!dbPaintingData){
         res.status(404).json({ message: 'No painting found with this id' });
         return;
       }

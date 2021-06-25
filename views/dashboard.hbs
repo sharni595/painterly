@@ -1,18 +1,42 @@
-<section>
-{{#if painting.length}}
-    <div>
-        {{#each painting}}
-    <div class="painting">
-        <a href="/painting/{{id}}">
-        <h4>{{title}}</h4>
-        <img src={{image_url}} alt="a painting">
-        </a>
-        <a  href="/user/{{user_id}}"> 
-        <span>{{user.username}}</span>
-        </a>
-    </div>
-    {{/each}}
-    </div>
-{{/if}}
-</section>
+<section>  
+    <section>
+        <form id="form">
+            <h2>New Art</h2>
+            <ul>
+                <li>
+                    <label for="title">What is the title of your painting?</label>
+                    <input type="text" id="title">
+                </li>
+                <li>
+                    <label for="description">Describe your painting</label>
+                    <textarea name="description" id="description" cols="30" rows="10"></textarea>
+                </li>
+                <li>
+                    <label>Select file to upload</label>
+                    <input type="file" id="fileupload">
+                </li>
+                    <li>
+                    <button type="submit" id="uploadButton">Convert</button>
+                </li>
+            </ul>
+        </form>
+    </section>
 
+    <section id="dashboard">
+        <h2>My Art</h2>
+        <div>
+        {{#each posts}}
+        <div class="painting">
+            <a href="/painting/{{id}}">
+            <h4>{{title}}</h4>
+            <img src={{image_url}} alt="a painting">
+            </a>
+            <a  href="/user/{{user_id}}"> 
+            <span>{{user.username}}</span>
+            </a>
+        </div>
+        {{/each}}
+        </div>
+    </section>
+<script src="/js/image-upload.js"></script>
+</section>
