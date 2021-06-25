@@ -15,7 +15,7 @@ router.post('/', (req, res) => {
         Comment.create({
             text: req.body.text,
             painting_id: req.body.painting_id,
-            user_id: req.body.user_id
+            user_id: req.session.user_id
         })
             .then(dbCommentData => res.json(dbCommentData))
             .catch(err => {

@@ -31,9 +31,7 @@ router.get('/', (req, res) => {
         ]
     })
         .then(dbPaintingData => {
-            console.log(dbPaintingData);
             const posts = dbPaintingData.map(post => post.get({ plain: true }));
-            console.log(posts);
             res.render('homepage', {
                 posts, 
                 loggedIn: req.session.loggedIn
@@ -48,8 +46,6 @@ router.get('/', (req, res) => {
 
 //where a user can create their own artwork. Will have a text box to add a title, and a canvas for painting. 
 router.get('/dashboard', (req, res) => {
-    console.log('--------------------');
-    console.log(req.session);
     Painting.findAll({
         where: {
             user_id: req.session.user_id
@@ -144,11 +140,11 @@ router.get('/painting/:id', (req, res) => {
          }
  
          //serialize the data
-         const post = dbPaintingData.get({ plain: true });
+         const painting = dbPaintingData.get({ plain: true });
  
          //pass data to template
          res.render('single-post', { 
-           post,
+           painting,
            loggedIn: req.session.loggedIn
          });
      })
@@ -163,7 +159,48 @@ router.get('/painting/:id', (req, res) => {
 
 //when a user clicks the name of the person who created a painting, they will be redirected to a page that displays all of that users creations. 
 router.get('user/:id', (req, res) => {
-    res.render('user-profile')
+    User.findOne({
+        where: {
+            id : req.params.id
+        },
+        attributes: [
+            'id', 
+            'username'  
+        ],      
+        include: [
+            {
+                model: Painting,
+                attributes: ['id', 'title', 'image_url', 'description', 'user_id', 'created_at'],
+                include: {
+                    model: Comment,
+                    attributes: ['id', 'text', 'painting_id', 'user_id', 'created_at'],
+                    include: {
+                        model: User,
+                        attributes: ['username']
+                    }
+                }
+            }
+        ]
+    })
+     .then(dbUserData => {
+         if (!dbUserData) {
+             res.status(400).json({ message: 'No user found with this id'});
+             return;
+         }
+ 
+         //serialize the data
+         const user = dbUserData.get({ plain: true });
+ 
+         //pass data to template
+         res.render('user-profile', { 
+           user,
+           loggedIn: req.session.loggedIn
+         });
+     })
+     .catch(err => {
+         console.log(err);
+         res.status(500).json(err);
+     });
 })
 
 
