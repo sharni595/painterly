@@ -1,16 +1,15 @@
 const upload = document.getElementById('uploadButton');
 const form = document.getElementById('form');
-var imageUrl = '';
 
 const paintingPost = (paintingObj) => {
 
     const title = paintingObj.title;
     const image_url = paintingObj.image_url;
     const description = paintingObj.description;
-    fetch('/api/painting', {
+    fetch('/painting', {
         method: 'POST',
         body: {
-            title, 
+            title,
             image_url,
             description
         },
@@ -28,7 +27,10 @@ const paintingPost = (paintingObj) => {
 
         })
         .then(imageData => {
-            console.log("hello");
+            console.log(imageData + ' Text');
+        })
+        .catch(err => {
+            console.log(`Error: ${err}`);
         })
 }
 
@@ -39,7 +41,7 @@ form.addEventListener('submit', (event) => {
     const description = document.getElementById('description').value;
     const file = document.getElementById('fileupload').files[0];
 
-    let paintingObj = {
+    const paintingObj = {
         title,
         image_url: '',
         description
@@ -62,17 +64,18 @@ form.addEventListener('submit', (event) => {
 
             //the respond object is whats holding the secure url, not imageData.
             //but for some reason, it wont pull that url with the below syntax
-            
+
             //document.location.reload();
         })
         .then(imageData => {
             console.log(imageData);
             //console.log(paintingObj)
             paintingObj.image_url = imageData.result.secure_url;
-            paintingPost(paintingObj);
+            console.log(paintingObj.image_url)
+            paintingPost(JSON.stringify(paintingObj));
         })
 
     return false
-    
+
 })
 
