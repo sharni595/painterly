@@ -1,37 +1,27 @@
 const upload = document.getElementById('uploadButton');
 const form = document.getElementById('form');
 
-const paintingPost = (paintingObj) => {
-
-    const title = paintingObj.title;
-    const image_url = paintingObj.image_url;
-    const description = paintingObj.description;
-    fetch('/painting', {
+async function paintingPost(title, image_url, description) {
+    console.log('This is before sent: ' + title, image_url, description);
+    // const title = paintingObj.title;
+    // const image_url = paintingObj.image_url;
+    // const description = paintingObj.description;
+    const response = await fetch('/api/painting', {
         method: 'POST',
-        body: {
-            title,
-            image_url,
-            description
-        },
+        body: JSON.stringify({
+            title: title,
+            image_url: image_url,
+            description: description
+        }),
         header: {
             'Content-Type': 'application/json'
         }
-    })
-        .then(response => {
-            if (!response.ok) {
-                console.log(paintingObj);
-                return alert(`Error: ${response.statusText}`);
-            }
-            console.log("-------------");
-            return response.json()
-
-        })
-        .then(imageData => {
-            console.log(imageData + ' Text');
-        })
-        .catch(err => {
-            console.log(`Error: ${err}`);
-        })
+    });
+    if (response.ok) {
+        document.location.reload();
+    } else {
+        alert(response.statusText);
+    }
 }
 
 form.addEventListener('submit', (event) => {
@@ -39,14 +29,8 @@ form.addEventListener('submit', (event) => {
 
     const title = document.getElementById('title').value;
     const description = document.getElementById('description').value;
+
     const file = document.getElementById('fileupload').files[0];
-
-    const paintingObj = {
-        title,
-        image_url: '',
-        description
-    }
-
     //console.log(paintingObj)
 
     const formData = new FormData();
@@ -70,9 +54,8 @@ form.addEventListener('submit', (event) => {
         .then(imageData => {
             console.log(imageData);
             //console.log(paintingObj)
-            paintingObj.image_url = imageData.result.secure_url;
-            console.log(paintingObj.image_url)
-            paintingPost(JSON.stringify(paintingObj));
+            const image_url = imageData.result.secure_url;
+            return paintingPost(title, image_url, description);
         })
 
     return false

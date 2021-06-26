@@ -82,18 +82,27 @@ router.get('/:id', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  console.log('Hit route')
-  Painting.create({
-    title: req.body.title,
-    image_url: req.body.image_url,
-    description: req.body.description,
-    user_id: req.session.user_id
-  })
-    .then(dbPaintingData => res.json(dbPaintingData))
-    .catch(err => {
-      console.log(err);
-      res.status(500).json(err);
-    });
+  if (req.session) {
+
+    console.log(`<-------------- ${req.body.title} -------------->`)
+    Painting.create({
+      title: req.body.title,
+      image_url: req.body.image_url,
+      description: req.body.description,
+      user_id: req.body.user_id
+    })
+      .then(dbPaintingData => {
+        console.log('Hit the Then in server')
+        res.json(dbPaintingData)
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  }
+  else {
+    console.log('No Session')
+  }
 })
 
 module.exports = router;
