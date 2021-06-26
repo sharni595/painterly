@@ -83,7 +83,7 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
   console.log('---hit---');
-  
+  console.log(req.body);
     Painting.create({
       title: req.body.title,
       image_url: req.body.image_url,

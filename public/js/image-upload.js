@@ -52,15 +52,15 @@ function paintingPost(paintingObj) {
     const image_url = paintingObj.image_url;
     const description = paintingObj.description;
     fetch('/api/painting', {
-        method: 'post',
-        body: {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
             title, 
             image_url,
             description
-        },
-        // header: {
-        //     'Content-Type': 'application/json'
-        // }
+        })
     })
         .then(response => {
             if (response.ok) {
@@ -73,5 +73,8 @@ function paintingPost(paintingObj) {
         })
         .then(imageData => {
             console.log("hello");
+        })
+        .catch(err => {
+            console.log(err);
         })
 }

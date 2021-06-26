@@ -24,8 +24,8 @@ app.use(session(sess));
 
 const PORT = process.env.PORT || 3001;
 
-app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 app.use(express.static('public'));
 
 app.engine('hbs', exphbs({ extname: 'hbs' })); // setting up express to use handlebars templating engine
