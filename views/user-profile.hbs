@@ -1,0 +1,13 @@
+<section id="user-profile">
+        <h2>{{user.username}}'s Art</h2>
+        <div>
+        {{#each user}}
+        <div class="painting">
+            <a href="/painting/{{painting.id}}">
+            <h4>{{painting.title}}</h4>
+            <img src={{painting.image_url}} alt="a painting">
+            </a>
+        </div>
+        {{/each}}
+        </div>
+    </section>

@@ -10,23 +10,24 @@ router.get('/', (req, res) => {
       'id',
       'title',
       'image_url',
-      'description',
+      'description', 
+      'user_id',
       'created_at'
     ],
     order: [['created_at', 'DESC']],
     include: [
-        {
-            model: Comment,
-            attributes: ['id', 'text', 'painting_id', 'user_id'],
-            include: {
-                model: User,
-                attributes: ['username']
-            }
-        },
-        {
-            model: User, 
-            attributes: ['username']
+      {
+        model: Comment,
+        attributes: ['id', 'text', 'painting_id', 'user_id'],
+        include: {
+          model: User,
+          attributes: ['username']
         }
+      },
+      {
+        model: User,
+        attributes: ['username']
+      }
     ]
   })
     .then(dbPaintingData => {
@@ -47,27 +48,28 @@ router.get('/:id', (req, res) => {
       'id',
       'title',
       'image_url',
-      'description',
+      'description', 
+      'user_id',
       'created_at'
-      ],
-      order: [['created_at', 'DESC']],
-      include: [
-          {
-              model: Comment,
-              attributes: ['id', 'text', 'painting_id', 'user_id'],
-              include: {
-                  model: User,
-                  attributes: ['username']
-              }
-          },
-          {
-              model: User, 
-              attributes: ['username']
-          }
-      ]
+    ],
+    order: [['created_at', 'DESC']],
+    include: [
+      {
+        model: Comment,
+        attributes: ['id', 'text', 'painting_id', 'user_id'],
+        include: {
+          model: User,
+          attributes: ['username']
+        }
+      },
+      {
+        model: User,
+        attributes: ['username']
+      }
+    ]
   })
     .then(dbPaintingData => {
-      if (!dbPaintingData) {
+      if (!dbPaintingData){
         res.status(404).json({ message: 'No painting found with this id' });
         return;
       }

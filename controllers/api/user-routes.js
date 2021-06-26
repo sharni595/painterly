@@ -70,6 +70,7 @@ router.post('/', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
+    console.log('``````````````````');
     User.findOne({
         where: {
           email: req.body.email
@@ -95,15 +96,20 @@ router.post('/login', (req, res) => {
           res.status(400).json({ message: 'Incorrect password!' });
           return;
         }
-    
+          
+        
+        
+        
         req.session.save(() => {
-          // declare session variables
-          req.session.user_id = dbUserData.id;
-          req.session.username = dbUserData.username;
-          req.session.loggedIn = true;
-    
+            // declare session variables
+            req.session.user_id = dbUserData.id;
+            req.session.username = dbUserData.username;
+            req.session.loggedIn = true;
+            
+          res.json({ user: dbUserData, message: 'You are now logged in!' });
         });
-        res.json({ user: dbUserData, message: 'You are now logged in!' });
+
+        
       });
 });
 
