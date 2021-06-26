@@ -2,35 +2,6 @@ const upload = document.getElementById('uploadButton');
 const form = document.getElementById('form');
 var imageUrl = '';
 
-const paintingPost = (paintingObj) => {
-
-    const title = paintingObj.title;
-    const image_url = paintingObj.image_url;
-    const description = paintingObj.description;
-    fetch('/api/painting', {
-        method: 'POST',
-        body: {
-            title, 
-            image_url,
-            description
-        },
-        header: {
-            'Content-Type': 'application/json'
-        }
-    })
-        .then(response => {
-            if (!response.ok) {
-                console.log(paintingObj);
-                return alert(`Error: ${response.statusText}`);
-            }
-            console.log("-------------");
-            return response.json()
-
-        })
-        .then(imageData => {
-            console.log("hello");
-        })
-}
 
 form.addEventListener('submit', (event) => {
     event.preventDefault();
@@ -66,13 +37,45 @@ form.addEventListener('submit', (event) => {
             //document.location.reload();
         })
         .then(imageData => {
-            console.log(imageData);
-            //console.log(paintingObj)
+            //console.log(imageData);
             paintingObj.image_url = imageData.result.secure_url;
-            paintingPost(paintingObj);
+            console.log(paintingObj.image_url)
+            return paintingPost(paintingObj);
         })
 
     return false
     
 })
 
+function paintingPost(paintingObj) {
+    const title = paintingObj.title;
+    const image_url = paintingObj.image_url;
+    const description = paintingObj.description;
+    fetch('/api/painting', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            title, 
+            image_url,
+            description
+        })
+    })
+        .then(response => {
+            if (response.ok) {
+                console.log("-------------");
+                document.location.reload();
+                return response.json();
+            } else{
+                console.log(paintingObj);
+                return alert(`Error: ${response.statusText}`);
+            }
+        })
+        .then(imageData => {
+            console.log("hello");
+        })
+        .catch(err => {
+            console.log(err);
+        })
+}
