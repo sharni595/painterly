@@ -160,15 +160,15 @@ router.get('/painting/:id', (req, res) => {
 
 
 //when a user clicks the name of the person who created a painting, they will be redirected to a page that displays all of that users creations. 
-router.get('user/:id', (req, res) => {
+router.get('/user/:id', (req, res) => {
     User.findOne({
         where: {
-            id : req.params.id
+            id: req.params.id
         },
         attributes: [
             'id', 
             'username'  
-        ],      
+        ],
         include: [
             {
                 model: Painting,
@@ -185,10 +185,10 @@ router.get('user/:id', (req, res) => {
              res.status(400).json({ message: 'No user found with this id'});
              return;
          }
- 
+         console.log(dbUserData);
          //serialize the data
          const user = dbUserData.get({ plain: true });
- 
+         console.log(user);
          //pass data to template
          res.render('user-profile', { 
            user,
