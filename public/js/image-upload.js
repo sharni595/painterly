@@ -65,7 +65,8 @@ function paintingPost(paintingObj) {
         .then(response => {
             if (response.ok) {
                 console.log("-------------");
-                return response.json()
+                document.location.reload();
+                return response.json();
             } else{
                 console.log(paintingObj);
                 return alert(`Error: ${response.statusText}`);
