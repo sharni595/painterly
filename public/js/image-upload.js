@@ -1,31 +1,6 @@
 const upload = document.getElementById('uploadButton');
 const form = document.getElementById('form');
 
-<<<<<<< HEAD
-async function paintingPost(title, image_url, description) {
-    console.log('This is before sent: ' + title, image_url, description);
-    // const title = paintingObj.title;
-    // const image_url = paintingObj.image_url;
-    // const description = paintingObj.description;
-    const response = await fetch('/api/painting', {
-        method: 'POST',
-        body: JSON.stringify({
-            title: title,
-            image_url: image_url,
-            description: description
-        }),
-        header: {
-            'Content-Type': 'application/json'
-        }
-    });
-    if (response.ok) {
-        document.location.reload();
-    } else {
-        alert(response.statusText);
-    }
-}
-=======
->>>>>>> main
 
 form.addEventListener('submit', (event) => {
     event.preventDefault();
@@ -55,17 +30,10 @@ form.addEventListener('submit', (event) => {
             //document.location.reload();
         })
         .then(imageData => {
-<<<<<<< HEAD
-            console.log(imageData);
-            //console.log(paintingObj)
-            const image_url = imageData.result.secure_url;
-            return paintingPost(title, image_url, description);
-=======
             //console.log(imageData);
             paintingObj.image_url = imageData.result.secure_url;
             console.log(paintingObj.image_url)
             return paintingPost(paintingObj);
->>>>>>> main
         })
 
     return false
@@ -82,7 +50,7 @@ function paintingPost(paintingObj) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            title, 
+            title,
             image_url,
             description
         })
@@ -92,7 +60,7 @@ function paintingPost(paintingObj) {
                 console.log("-------------");
                 document.location.reload();
                 return response.json();
-            } else{
+            } else {
                 console.log(paintingObj);
                 return alert(`Error: ${response.statusText}`);
             }
