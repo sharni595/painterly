@@ -1,9 +1,14 @@
+  
 footer{
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  background-color: beige;
-  color: black;
-  text-align: center;
-}
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #F9C846;
+    color: black;
+    text-align: center;
+  }
+
+  body{
+    background-color: #FFFFFC;
+  }
