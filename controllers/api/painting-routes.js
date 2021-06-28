@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
       'id',
       'title',
       'image_url',
-      'description', 
+      'description',
       'user_id',
       'created_at'
     ],
@@ -48,7 +48,7 @@ router.get('/:id', (req, res) => {
       'id',
       'title',
       'image_url',
-      'description', 
+      'description',
       'user_id',
       'created_at'
     ],
@@ -69,7 +69,7 @@ router.get('/:id', (req, res) => {
     ]
   })
     .then(dbPaintingData => {
-      if (!dbPaintingData){
+      if (!dbPaintingData) {
         res.status(404).json({ message: 'No painting found with this id' });
         return;
       }
@@ -82,22 +82,20 @@ router.get('/:id', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  console.log('---hit---');
-  console.log(req.body);
-    Painting.create({
-      title: req.body.title,
-      image_url: req.body.image_url,
-      description: req.body.description,
-      user_id: req.session.user_id
+  Painting.create({
+    title: req.body.title,
+    image_url: req.body.image_url,
+    description: req.body.description,
+    user_id: req.session.user_id
+  })
+    .then(dbPaintingData => {
+      res.json(dbPaintingData)
     })
-      .then(dbPaintingData => {
-        console.log('>>>>>>>>>');
-        res.json(dbPaintingData)})
-      .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-      });
-  
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+
 })
 
 module.exports = router;

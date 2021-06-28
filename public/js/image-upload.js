@@ -1,6 +1,5 @@
 const upload = document.getElementById('uploadButton');
 const form = document.getElementById('form');
-var imageUrl = '';
 
 
 form.addEventListener('submit', (event) => {
@@ -8,15 +7,13 @@ form.addEventListener('submit', (event) => {
 
     const title = document.getElementById('title').value;
     const description = document.getElementById('description').value;
-    const file = document.getElementById('fileupload').files[0];
-
-    let paintingObj = {
+    const paintingObj = {
         title,
-        image_url: '',
-        description
+        description,
+        image_url: ''
     }
 
-    //console.log(paintingObj)
+    const file = document.getElementById('fileupload').files[0];
 
     const formData = new FormData();
     formData.append('photo', file)
@@ -30,21 +27,14 @@ form.addEventListener('submit', (event) => {
                 return alert(`Error: ${response.statusText}`);
             }
             return response.json();
-
-            //the respond object is whats holding the secure url, not imageData.
-            //but for some reason, it wont pull that url with the below syntax
-            
-            //document.location.reload();
         })
         .then(imageData => {
-            //console.log(imageData);
             paintingObj.image_url = imageData.result.secure_url;
-            console.log(paintingObj.image_url)
             return paintingPost(paintingObj);
         })
 
     return false
-    
+
 })
 
 function paintingPost(paintingObj) {
@@ -57,23 +47,21 @@ function paintingPost(paintingObj) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            title, 
+            title,
             image_url,
             description
         })
     })
         .then(response => {
             if (response.ok) {
-                console.log("-------------");
                 document.location.reload();
                 return response.json();
-            } else{
-                console.log(paintingObj);
+            } else {
                 return alert(`Error: ${response.statusText}`);
             }
         })
-        .then(imageData => {
-            console.log("hello");
+        .then(() => {
+            console.log('Success!')
         })
         .catch(err => {
             console.log(err);

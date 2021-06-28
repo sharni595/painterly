@@ -54,5 +54,9 @@ clear.addEventListener('click', () => {
 
 save.addEventListener('click', () => {
     let canvasName = prompt('What would you like to name your painting?')
-    saveCanvas(canvasName, 'jpg');
+    if (canvasName) {
+        saveCanvas(canvasName, 'jpg');
+    } else {
+        return;
+    }
 });
