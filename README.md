@@ -4,7 +4,7 @@ Painterly
 ### Table of Contents
 - [Description](#description)
 - [Introduction](#introduction)
-- [Screenshots](#screenshows)
+- [Screenshots](#screenshots)
 - [Contributors](#contributors)
 - [Resources](#resources)
 
