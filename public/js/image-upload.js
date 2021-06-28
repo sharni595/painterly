@@ -7,9 +7,13 @@ form.addEventListener('submit', (event) => {
 
     const title = document.getElementById('title').value;
     const description = document.getElementById('description').value;
+    const paintingObj = {
+        title,
+        description,
+        image_url: ''
+    }
 
     const file = document.getElementById('fileupload').files[0];
-    //console.log(paintingObj)
 
     const formData = new FormData();
     formData.append('photo', file)
@@ -23,16 +27,9 @@ form.addEventListener('submit', (event) => {
                 return alert(`Error: ${response.statusText}`);
             }
             return response.json();
-
-            //the respond object is whats holding the secure url, not imageData.
-            //but for some reason, it wont pull that url with the below syntax
-
-            //document.location.reload();
         })
         .then(imageData => {
-            //console.log(imageData);
             paintingObj.image_url = imageData.result.secure_url;
-            console.log(paintingObj.image_url)
             return paintingPost(paintingObj);
         })
 
@@ -57,16 +54,14 @@ function paintingPost(paintingObj) {
     })
         .then(response => {
             if (response.ok) {
-                console.log("-------------");
                 document.location.reload();
                 return response.json();
             } else {
-                console.log(paintingObj);
                 return alert(`Error: ${response.statusText}`);
             }
         })
-        .then(imageData => {
-            console.log("hello");
+        .then(() => {
+            console.log('Success!')
         })
         .catch(err => {
             console.log(err);

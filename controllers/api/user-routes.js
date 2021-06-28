@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
     User.findOne({
-        attributes: { exclude : ['password'] },
+        attributes: { exclude: ['password'] },
         where: {
             id: req.params.id
         },
@@ -59,7 +59,7 @@ router.post('/', (req, res) => {
                 req.session.user_id = dbUserData.id;
                 req.session.username = dbUserData.username;
                 req.session.loggedIn = true;
-    
+
             });
             res.json(dbUserData);
         })
@@ -70,52 +70,49 @@ router.post('/', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
-    console.log('``````````````````');
     User.findOne({
         where: {
-          email: req.body.email
+            email: req.body.email
         }
-      }).then(dbUserData => {
+    }).then(dbUserData => {
         if (!dbUserData) {
-          res.status(400).json({ message: 'No user with that email!' });
-          return;
+            res.status(400).json({ message: 'No user with that email!' });
+            return;
         }
 
-        console.log(dbUserData.password);
 
         let password = dbUserData.password;
 
-        function checkPassword (loginPw) {
+        function checkPassword(loginPw) {
             return bcrypt.compare(loginPw, password);
         }
         const validPassword = checkPassword(req.body.password);
-    
-        //console.log(typeof dbUserData.checkPassword);
+
 
         if (!validPassword) {
-          res.status(400).json({ message: 'Incorrect password!' });
-          return;
+            res.status(400).json({ message: 'Incorrect password!' });
+            return;
         }
-        
+
         req.session.save(() => {
             // declare session variables
             req.session.user_id = dbUserData.id;
             req.session.username = dbUserData.username;
             req.session.loggedIn = true;
-            
-          res.json({ user: dbUserData, message: 'You are now logged in!' });
+
+            res.json({ user: dbUserData, message: 'You are now logged in!' });
         });
 
-        
-      });
+
+    });
 });
 
 router.post('/logout', (req, res) => {
-    if(req.session.loggedIn){
+    if (req.session.loggedIn) {
         req.session.destroy(() => {
             res.sendStatus(204).end();
         });
-    } else{
+    } else {
         res.status(404).end();
     }
 });

@@ -82,8 +82,6 @@ router.get('/:id', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  console.log('---hit---');
-  console.log(req.body);
   Painting.create({
     title: req.body.title,
     image_url: req.body.image_url,
@@ -91,7 +89,6 @@ router.post('/', (req, res) => {
     user_id: req.session.user_id
   })
     .then(dbPaintingData => {
-      console.log('>>>>>>>>>');
       res.json(dbPaintingData)
     })
     .catch(err => {
