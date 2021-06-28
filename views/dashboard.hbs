@@ -1,35 +1,39 @@
-<section>  
-    <section>
+<section class="container">
+<section class="row"> 
+    <div class="col-6">
         <form id="form">
             <h2>New Art</h2>
             <ul>
-                <li>
-                    <label for="title">What is the title of your painting?</label>
-                    <input type="text" id="title">
-                </li>
-                <li>
-                    <label for="description">Describe your painting</label>
-                    <textarea name="description" id="description" cols="30" rows="10"></textarea>
-                </li>
-                <li>
+                <ul>
+                    <label for="title" class="form-label">What is the title of your painting?</label>
+                    <input type="text" class="form-control" id="title">
+                </ul>
+                <ul>
+                    <label for="description" class="form-label">Describe your painting</label>
+                    <textarea name="description" class="form-control" id="description" cols="30" rows="10"></textarea>
+                </ul>
+                <ul>
                     <label>Select file to upload</label>
-                    <input type="file" id="fileupload">
-                </li>
-                    <li>
+                    <input type="file" class="form-control" id="fileupload">
+                </ul>
+                    <ul>
                     <button type="submit" id="uploadButton">Convert</button>
-                </li>
+                </ul>
             </ul>
         </form>
-    </section>
+    </div>
+    
 
-    <section id="dashboard">
+    <div id="dashboard" class="col-6">
         <h2>My Art</h2>
         <div>
         {{#each posts}}
         <div class="painting">
             <a href="/painting/{{id}}">
             <h4>{{title}}</h4>
+            <div class="frame">
             <img src={{image_url}} alt="a painting">
+            </div>
             </a>
             <a  href="/user/{{user_id}}"> 
             <span>{{user.username}}</span>
@@ -37,6 +41,7 @@
         </div>
         {{/each}}
         </div>
-    </section>
+    </div>
 <script src="/js/image-upload.js"></script>
+</section>
 </section>

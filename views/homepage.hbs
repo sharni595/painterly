@@ -3,7 +3,9 @@
   <div class="painting">
     <a href="/painting/{{id}}">
       <h4>{{title}}</h4>
-      <img src={{image_url}}>
+      <div class="frame">
+         <img src={{image_url}}>
+      </div>
     </a>
     <a  href="/user/{{user_id}}"> 
       <span>By {{user.username}} on {{created_at}}</span>
