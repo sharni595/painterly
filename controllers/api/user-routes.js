@@ -81,14 +81,7 @@ router.post('/login', (req, res) => {
           return;
         }
 
-        console.log(dbUserData.password);
-
-        let password = dbUserData.password;
-
-        function checkPassword (loginPw) {
-            return bcrypt.compare(loginPw, password);
-        }
-        const validPassword = checkPassword(req.body.password);
+        const validPassword = dbUserData.checkPassword(req.body.password);
     
         //console.log(typeof dbUserData.checkPassword);
 

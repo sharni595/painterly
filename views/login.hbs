@@ -1,32 +1,27 @@
 
 <link rel="stylesheet" href="/css/login.css">
-<section>
-    <div class="container">
-        <div class="row justify-content-center">
+<section class="login-page">
     <form id="login">
-        <h3>Log In</h3>
-        <p>Welcome back!</p>
+        <h3 class="text-center">Log In</h3>
+        <p class="text-center">Welcome back!</p>
 
         <div class="container">
-            <div class="row justify-content-center">
             <label for="login-email" class="form-label">Email</label>
             <input type="email" class="form-control" id="login-email">
         </div>
         <div class="container">
-            <div class="row justify-content-center">
             <label for="login-password" class="form-label">Password</label>
-            <input type="password"cclass="form-control" id="login-password">
+            <input type="password" class="form-control" id="login-password">
         </div>
-        <div class="container">
-            <div class="row justify-content-center">
-            <button type="submit">Log In</button>
+        <div class="row justify-content-center mb-4">
+            <button type="submit" class="btn btn-outline-warning">Log In</button>
         </div>
     </form>
-    <div class="container">
-        <div class="row justify-content-center">
+   
     <form id="sign-up">
-        <h3>Sign Up</h3>
-        <p>New to painterly? Sign up now!</p>
+        <h3 class="text-center">Sign Up</h3>
+        <p class="text-center">New to painterly? Sign up now!</p>
+        <div id="success-message"></div>
         <div>
             <label for="signup-username" class="form-label">Username</label>
             <input type="text" class="form-control" id="signup-username">
@@ -40,7 +35,7 @@
             <input type="password" class="form-control" id="signup-password">
         </div>
         <div class="row justify-content-center">
-            <button type="submit">Sign Up</button>
+            <button type="submit" class="btn btn-outline-warning">Sign Up</button>
         </div>
     </form>
 </section>

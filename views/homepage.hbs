@@ -1,15 +1,18 @@
-<section id="homepage">
-  {{#each posts}}
-  <div class="painting">
-    <a href="/painting/{{id}}">
-      <h4>{{title}}</h4>
-      <div class="frame">
-         <img src={{image_url}}>
-      </div>
-    </a>
-    <a  href="/user/{{user_id}}"> 
-      <span>By {{user.username}} on {{created_at}}</span>
-    </a>
+<section id="homepage" class="container">
+  <div class="row parent">
+    {{#each posts}}
+    <div class="col-12 col-lg-6 painting">
+      <a href="/painting/{{id}}">
+        <h4 class="painting-title">{{title}}</h4>
+        <div class="frame">
+          <img src={{image_url}}>
+        </div>
+      </a>
+      <br>
+      <a  href="/user/{{user_id}}"> 
+        <p class="user-info">By {{user.username}} </p>
+      </a>
+    </div>
+    {{/each}}
   </div>
-  {{/each}}
 </section>

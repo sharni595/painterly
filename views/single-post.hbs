@@ -1,36 +1,38 @@
 <section id="single-post">
         <div class="painting">
             <a href="/painting/{{painting.id}}">
-              <h4>{{painting.title}}</h4>
-              <div class="frame">
+              <h4 class="painting-title">{{painting.title}}</h4>
+              <div class="frame single-frame">
                 <img src={{painting.image_url}} alt="a painting">
-              <div>{{painting.description}}</div>
+              </div>
             </a>
+            <p class="text-center description">{{painting.description}}</p>
             <a  href="/user/{{painting.user_id}}"> 
-              <span>{{painting.user.username}}</span>
+              <p class="user-info text-center">By {{painting.user.username}}</p>
             </a>
         </div>
 
         {{#if loggedIn}}
         <form class="comment-form">
           <div>
-            <textarea name="comment-text"></textarea>
+            <textarea class="form-control comment-text" name="comment-text"></textarea>
           </div>
 
           <div>
-            <button type="submit">Comment</button>
+            <button class="btn btn-outline-warning comment-btn" type="submit">Comment</button>
           </div>
         </form>
         {{/if}}
 
         <div class="comments">
+          <h5 class="text-center mt-5">Comments</h5>
           {{#each painting.comments}}
-          <section class="comment">
-            <div class="text">
+          <section class="comment border">
+            <div class="text-center">
               {{text}}
             </div>
-            <div class="text-info">
-              By {{user.username}} on {{created_at}}
+            <div class="text-info text-center">
+              By {{user.username}}
             </div>
           </section>
           {{/each}}
