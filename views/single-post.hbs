@@ -1,13 +1,13 @@
 <section id="single-post">
-        
         <div class="painting">
             <a href="/painting/{{painting.id}}">
-            <h4>{{painting.title}}</h4>
-            <img src={{painting.image_url}} alt="a painting">
-            <div>{{painting.description}}</div>
+              <h4>{{painting.title}}</h4>
+              <div class="frame">
+                <img src={{painting.image_url}} alt="a painting">
+              <div>{{painting.description}}</div>
             </a>
             <a  href="/user/{{painting.user_id}}"> 
-            <span>{{painting.user.username}}</span>
+              <span>{{painting.user.username}}</span>
             </a>
         </div>
 
