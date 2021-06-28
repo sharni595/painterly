@@ -3,7 +3,9 @@
         <div class="painting">
             <a href="/painting/{{painting.id}}">
             <h4>{{painting.title}}</h4>
+            <div class="frame">
             <img src={{painting.image_url}} alt="a painting">
+            </div>
             </a>
             <a  href="/user/{{painting.user_id}}"> 
             <span>{{painting.user.username}}</span>
