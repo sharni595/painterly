@@ -1,50 +1,46 @@
 <section class="container">
-<section class="row"> 
-    <div class="col-6">
-        <form id="form">
-            <h2>New Art</h2>
-            <ul>
+    <section class="row"> 
+        <div class="col-12 col-lg-6">
+            <form id="form">
+                <h2 class="text-center">New Art</h2>
                 <ul>
-                    <label for="title" class="form-label">What is the title of your painting?</label>
-                    <input type="text" class="form-control" id="title">
-                </ul>
-                <ul>
-                    <label for="description" class="form-label">Describe your painting</label>
-                    <textarea name="description" class="form-control" id="description" cols="30" rows="10"></textarea>
-                </ul>
-                <ul>
-                    <label>Select file to upload</label>
-                    <label class="btn btn-outline-warning">
-                        Upload File
-                    <input type="file" class="form-control" id="fileupload">
-                    </label>
-                </ul>
-                    <ul>
-                    <button type="submit" id="uploadButton">Convert</button>
+                    <li>
+                        <label for="title" class="form-label">What is the title of your painting?</label>
+                        <input type="text" class="form-control" id="title">
+                    </li>
+                    <li>
+                        <label for="description" class="form-label">Describe your painting</label>
+                        <textarea name="description" class="form-control" id="description" cols="30" rows="10"></textarea>
+                    </li>
+                    <li>
+                        <label>Select file to upload</label>
+                        
+                        <input type="file" class="form-control" id="fileupload">
+                        
+                    </li>
+                        <button type="submit" id="uploadButton" class="btn btn-outline-warning">Post</button>
+                    </li>
                 </ul>
             </ul>
         </form>
     </div>
     
 
-    <div id="dashboard" class="col-6">
-        <h2>My Art</h2>
-        <div>
-        {{#each posts}}
-        <div class="painting">
-            <a href="/painting/{{id}}">
-            <h4>{{title}}</h4>
-            <div class="frame">
-            <img src={{image_url}} alt="a painting">
+        <div id="dashboard" class="col-12 col-lg-6">
+            <h2 class="text-center">My Art</h2>
+            <div>
+            {{#each posts}}
+            <div class="painting">
+                <a href="/painting/{{id}}">
+                    <h4 class="painting-title">{{title}}</h4>
+                    <div class="frame">
+                        <img src={{image_url}} alt="a painting">
+                    </div>
+                </a>
             </div>
-            </a>
-            <a  href="/user/{{user_id}}"> 
-            <span>{{user.username}}</span>
-            </a>
+            {{/each}}
+            </div>
         </div>
-        {{/each}}
-        </div>
-    </div>
-<script src="/js/image-upload.js"></script>
-</section>
+    <script src="/js/image-upload.js"></script>
+    </section>
 </section>

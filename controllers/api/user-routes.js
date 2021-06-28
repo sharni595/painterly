@@ -80,14 +80,9 @@ router.post('/login', (req, res) => {
             return;
         }
 
-
-        let password = dbUserData.password;
-
-        function checkPassword(loginPw) {
-            return bcrypt.compare(loginPw, password);
-        }
-        const validPassword = checkPassword(req.body.password);
-
+        const validPassword = dbUserData.checkPassword(req.body.password);
+    
+        //console.log(typeof dbUserData.checkPassword);
 
         if (!validPassword) {
             res.status(400).json({ message: 'Incorrect password!' });

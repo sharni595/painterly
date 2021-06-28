@@ -17,7 +17,12 @@ async function signupFormHandler(event) {
         });
         if (response.ok) {
             console.log('success');
-
+            const success = document.createElement("p")
+            success.innerHTML = 'Sign up successful!';
+            document.querySelector('#success-message').appendChild(success);
+            setTimeout(function(){
+                document.location.reload();
+            }, 2000);
         } else {
             alert(response.statusText);
         }

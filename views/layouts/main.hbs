@@ -7,7 +7,7 @@
 
   <!-- Latest compiled and minified CSS & JS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.0.0/lumen/bootstrap.min.css" />
-  {{!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>  --}}
+  {{!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>   --}}
 
   <link rel="stylesheet" href="/css/styles.css">
 </head>
@@ -15,33 +15,33 @@
 <body>
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/"><img src="/images/logo.png" height="75" width="400"></a>
+    <a class="navbar-brand" href="/"><img src="/images/logo.png" height="70" width="350" id="logo"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
-    </button>
+    </button> 
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
         {{#if loggedIn}}
         <li class="nav-item active">
-          <a class="nav-link" href="/">Home</a>
+          <a class="btn btn-outline-warning" href="/">Home</a>
         </li>
 
         <li class="nav-item active">
-          <a class="nav-link" href="/dashboard">My Paintings</a>
+          <a class="btn btn-outline-warning" href="/dashboard">My Paintings</a>
         </li>
 
         <li>
-          <a class="nav-link" href="/canvas">New Painting</a>
+          <a class="btn btn-outline-warning" href="/canvas">New Painting</a>
         </li>
 
         <li>
-          <button id="logout">Log Out</button>
+          <button id="logout" class="btn btn-outline-warning">Log Out</button>
         </li>
         {{else}}
         <li>
-          <a href="/login">Log In</a>
+          <a href="/login" class="btn btn-outline-warning">Log In</a>
         </li>
         {{/if}}
       </ul>
