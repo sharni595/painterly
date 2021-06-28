@@ -9,13 +9,13 @@ a:hover{
 }
  
 footer{
-  position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
   background-color: #F9C846;
   color: black;
   text-align: center;
+  margin-top: 20px;
 }
 
 body{
@@ -28,8 +28,12 @@ html {
   height:100%;
 }
 
-input[type="file"] {
+/* input[type="file"] {
   display: none;
+} */
+
+ul {
+  list-style: none;
 }
   
 .frame img {
