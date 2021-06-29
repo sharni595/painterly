@@ -47,7 +47,7 @@ Our motivation was to create an app that gave users a creative outlet anywhere, 
 
 [GitHub Repo](https://github.com/sharni595/painterly)
 
-[Live URL](https://painter1y.herokuapp.com/dashboard)
+[Live URL](https://painter1y.herokuapp.com)
 
 [Chris Smith - creator of picture frame styling](https://codepen.io/chris22smith)
 
