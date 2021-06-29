@@ -24,8 +24,15 @@ async function signupFormHandler(event) {
                 document.location.reload();
             }, 2000);
         } else {
-            alert(response.statusText);
+            const error = document.createElement("p")
+            error.innerHTML = 'Something went wrong. Make sure all areas are filled and password is at least 6 characters.';
+            document.querySelector('#success-message').appendChild(error);
+            //alert(response.statusText);
         }
+    } else {
+        const error = document.createElement("p")
+        error.innerHTML = 'Something went wrong. Make sure all areas are filled and password is at least 6 characters.';
+        document.querySelector('#success-message').appendChild(error);
     }
 }
 
@@ -48,7 +55,9 @@ async function loginFormHandler(event) {
         if (response.ok) {
             document.location.replace('/dashboard');
         } else {
-            alert(response.statusText);
+            const error = document.createElement("p")
+            error.innerHTML = 'Incorrect email or password! Try again.';
+            document.querySelector('#login-error').appendChild(error);
         }
     }
 }
